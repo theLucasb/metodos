@@ -3,48 +3,49 @@ package com.user.user.Dto;
 import com.user.user.Model.Orders;
 import com.user.user.Model.User;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class OrdersDto {
-    private Long id;
-    private User idUser;
+
+    private Long idUser;
+
     private Long idStock;
+
     private String stockSymbol;
+
     private String stockName;
+
     private Long volume;
-    private Long volumeRemaining;
-    private double price;
+
     private Integer type;
+
     private Integer status;
 
-    public OrdersDto(Long id, User idUser, Long idStock, String stockSymbol,
-            String stockName, Long volume, double price, Integer type, Integer status) {
-        this.id = id;
-        this.idUser = idUser;
-        this.idStock = idStock;
-        this.stockSymbol = stockSymbol;
-        this.stockName = stockName;
-        this.volume = volume;
-        this.price = price;
-        this.type = type;
-        this.status = status;
-    }
+    private Double price;
 
-    public OrdersDto(Orders orders) {
-        id = orders.getId();
-        idUser = orders.getIdUser();
-        idStock = orders.getIdStock();
-        stockSymbol = orders.getStockSymbol();
-        stockName = orders.getStockName();
-        volume = orders.getVolume();
-        price = orders.getPrice();
-        type = orders.getType();
-        status = orders.getStatus();
-    }
+    private Long volumeRemaining;
 
-    public Object tranformaParaObjeto1(User user) {
-        return null;
-    }
+    public Orders transformaParaObjeto(User users) {
+        Orders orders = new Orders();
+        orders.setUsers(users);
+        orders.setIdStock(idStock);
+        orders.setStockSymbol(stockSymbol);
+        orders.setStockName(stockName);
+        orders.setVolume(volume);
+        orders.setType(type);
+        orders.setStatus(status);
+        orders.setPrice(price);
+        orders.setVolumeRemaining(volumeRemaining);
 
+        return orders;
+    }
 }

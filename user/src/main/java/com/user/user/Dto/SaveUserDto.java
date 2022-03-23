@@ -8,18 +8,26 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Setter
-@Getter
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDto {
+@Setter
+@Getter
+public class SaveUserDto {
 
-    private Long id;
+    private String username;
+
+    private String password;
+
+    private Double dollarBalance;
+
+    private Boolean enabled = true;
 
     public User transformaParaObjeto() {
         return new User(
-                id, null, null, null, null, null, null);
+                null, username,
+                password,
+                dollarBalance,
+                enabled, null, null);
     }
-
 }

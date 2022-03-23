@@ -46,4 +46,14 @@ public class Stock {
     @Column(name = "updated_on")
     private Timestamp updatedOn;
 
+    public Stock(Long id, Double bidMin, Double bidMax) {
+        this.id = id;
+        this.bidMin = bidMin;
+        this.bidMax = bidMax;
+    }
+
+    public Stock(Long id, String stockSymbol, String stockName, Double bidMin, Double bidMax, Double askMin,
+            Double askMax) {
+    }
+
 }

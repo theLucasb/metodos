@@ -6,33 +6,39 @@ import com.user.user.Model.UserStockBalance;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Setter
+@Getter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 public class UserStockBalanceDto {
-
     private Long idUser;
-    private Long idStock;
-    private String stockSymbol;
-    private String stockName;
-    private Integer volume;
 
-    public UserStockBalance userStockObj(User user) {
-        return new UserStockBalance(
-                new IdUserStocks(user, getIdStock()),
+    private Long idStock;
+
+    private String stockSymbol;
+
+    private String stockName;
+
+    private Long volume;
+
+    public UserStockBalance transformaParaObjeto(User user) {
+        return new UserStockBalance(new IdUserStocks(user, idStock),
                 stockSymbol,
                 stockName,
                 volume);
-
     }
 
-    // public UserStockBalanceDto(UserStockBalanceDto userStockBalance) {
-    // idUser = userStockBalance.getIdUser();
-    // stockSymbol = userStockBalance.getStockSymbol();
-    // stockName = userStockBalance.getStockName();
-    // volume = userStockBalance.getVolume();
-    // }
+    public UserStockBalanceDto(UserStockBalance userStockBalance) {
+        this.idUser = userStockBalance.getId().getUser().getId();
+        this.idStock = userStockBalance.getId().getIdStock();
+        this.stockSymbol = userStockBalance.getStockSymbol();
+        this.stockName = userStockBalance.getStockName();
+        this.volume = userStockBalance.getVolume();
+    }
 
 }

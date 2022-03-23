@@ -1,6 +1,7 @@
 package com.user.user.Model;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -16,6 +17,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Embeddable
 public class IdUserStocks implements Serializable {
+
     @ManyToOne
     @JoinColumn(name = "id_user")
     private User user;
@@ -26,7 +28,7 @@ public class IdUserStocks implements Serializable {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUsers(User user) {
         this.user = user;
     }
 
@@ -38,4 +40,18 @@ public class IdUserStocks implements Serializable {
         this.idStock = idStock;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        IdUserStocks that = (IdUserStocks) o;
+        return Objects.equals(user, that.user) && Objects.equals(idStock, that.idStock);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(user, idStock);
+    }
 }

@@ -1,36 +1,93 @@
-// package com.stocks.stocks.services;
+package com.stocks.stocks.services;
 
-// import java.util.List;
-// import java.util.Optional;
+import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.CopyOnWriteArrayList;
 
-// import com.stocks.stocks.controller.StockController;
-// import com.stocks.stocks.model.Stock;
-// import com.stocks.stocks.repository.StockRepository;
+import javax.servlet.http.HttpServletResponse;
 
-// import org.springframework.stereotype.Service;
+import com.stocks.stocks.dto.GetAllStocksDto;
+import com.stocks.stocks.dto.StockDto;
+import com.stocks.stocks.dto.StockInfoDto;
+import com.stocks.stocks.model.Stock;
+import com.stocks.stocks.repository.StockRepository;
 
-// import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
-// @Service
-// @RequiredArgsConstructor
-// public class StockService implements IStockService {
-// private final StockRepository stockRepository;
+import javassist.NotFoundException;
+import lombok.RequiredArgsConstructor;
 
-// @Override
-// public Optional<Stock> stockSymbol(String stockSymbol) {
-// return stockRepository.stockSymbol(stockSymbol);
-// }
+@Service
+@RequiredArgsConstructor
+public class StockService {
 
-// public List<Stock> getStock(String stock_name) throws Exception {
-// List<Stock> stock = stockRepository.findByName(stock_name);
-// return stock;
-// }
+    org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(StockService.class);
 
-// public Object stockUnico(long l) {
-// return null;
-// }
+    private final StockRepository stockRepository;
 
-// public void standaloneSetup(StockController stockController) {
-// }
+    public Stock salvar(Stock stock) {
+        return stockRepository.save(stock);
+    }
 
-// }
+    private List<SseEmitter> emitters = new CopyOnWriteArrayList<>();
+
+    public StockInfoDto getStockInfo(Long id) throws NotFoundException {
+        Optional<Stock> stock = stockRepository.findById(id);
+        if (stock.isPresent()) {
+            return new StockInfoDto(stock.get());
+        } else {
+            throw new NotFoundException("STOCK_NOT_FOUND");
+        }
+    }
+
+    public List<GetAllStocksDto> listByUpdate() {
+        return stockRepository.findAllOrderByUpdate().stream().map(GetAllStocksDto::new).toList();
+    }
+
+    public ResponseEntity<StockDto> updateStocks(StockDto stockDto) {
+        Stock stock = stockRepository.findById(stockDto.getId()).orElseThrow(Error::new);
+        if (stockDto.getBidMin() != null) {
+            stock.setBidMin(stockDto.getBidMin());
+        }
+        if (stockDto.getBidMax() != null) {
+            stock.setBidMax(stockDto.getBidMax());
+        }
+        if (stockDto.getAskMin() != null) {
+            stock.setAskMin(stockDto.getAskMin());
+        }
+        if (stockDto.getAskMax() != null) {
+            stock.setAskMax(stockDto.getAskMax());
+        }
+        stockRepository.save(stockDto.entity());
+        return new ResponseEntity<>(stockDto, HttpStatus.OK);
+    }
+
+    public SseEmitter subscribe(HttpServletResponse response) {
+        response.setHeader("Cache_control", "no-store");
+        SseEmitter sseEmitter = new SseEmitter(Long.MAX_VALUE);
+
+        try {
+            emitters.add(sseEmitter);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
+        sseEmitter.onCompletion(() -> this.emitters.remove(sseEmitter));
+
+        return sseEmitter;
+    }
+
+    public void dispatchEventToClients() {
+        for (SseEmitter emitter : emitters) {
+            try {
+                emitter.send(stockRepository.findAllOrderByUpdate());
+            } catch (IOException e) {
+                emitters.remove(emitter);
+            }
+        }
+    }
+
+}

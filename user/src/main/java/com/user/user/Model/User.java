@@ -10,27 +10,33 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
 @Table(name = "users")
 public class User implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "username")
     private String username;
+    @Column(name = "password")
     private String password;
     @Column(name = "dollar_balance")
-    private double dollarBalance;
-    private boolean enabled;
-    @UpdateTimestamp
+    private Double dollarBalance;
+    private Boolean enabled = true;
+    @CreationTimestamp
     @Column(name = "created_on")
     private Timestamp createdOn;
     @UpdateTimestamp
