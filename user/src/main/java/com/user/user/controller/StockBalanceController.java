@@ -26,7 +26,7 @@ import lombok.RequiredArgsConstructor;
 @CrossOrigin("http://localhost:8081/")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(value = "/api")
+@RequestMapping
 public class StockBalanceController {
 
     @Autowired

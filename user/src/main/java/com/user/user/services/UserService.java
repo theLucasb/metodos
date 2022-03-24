@@ -32,16 +32,23 @@ public class UserService {
         return userRepository.findById(id).orElseThrow();
     }
 
-    public UserDto findByUsername(String username) throws NotFoundException {
+    // public UserDto findByUsername(String username) throws NotFoundException {
+    // Optional<User> user = userRepository.findByUsername(username);
+    // if (user.isPresent()) {
+    // return new UserDto(user.get().getId());
+    // } else {
+    // throw new NotFoundException("NOT_FOUND");
+    // }
+    // }
+
+    public Optional<UserDto> findByUsername(String username) {
         Optional<User> user = userRepository.findByUsername(username);
-        if (user.isPresent()) {
-            return new UserDto(user.get().getId());
-        } else {
-            throw new NotFoundException("NOT_FOUND");
-        }
+        return user.map(UserDto::new);
+
     }
 
-    public List<UserDto> listAllDto() {
-        return userRepository.findAll().stream().map((User user) -> new UserDto(user.getId())).toList();
-    }
+    // public List<UserDto> listAllDto() {
+    // return userRepository.findAll().stream().map((User user) -> new
+    // UserDto(user.getId())).toList();
+    // }
 }

@@ -7,9 +7,9 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.stocks.stocks.dto.GetAllStocksDto;
+import com.stocks.stocks.dto.AllStockDto;
 import com.stocks.stocks.dto.StockDto;
-import com.stocks.stocks.dto.StockInfoDto;
+import com.stocks.stocks.dto.InfoStockDto;
 import com.stocks.stocks.model.Stock;
 import com.stocks.stocks.repository.StockRepository;
 
@@ -35,20 +35,20 @@ public class StockService {
 
     private List<SseEmitter> emitters = new CopyOnWriteArrayList<>();
 
-    public StockInfoDto getStockInfo(Long id) throws NotFoundException {
+    public InfoStockDto getInfoStock(Long id) throws NotFoundException {
         Optional<Stock> stock = stockRepository.findById(id);
         if (stock.isPresent()) {
-            return new StockInfoDto(stock.get());
+            return new InfoStockDto(stock.get());
         } else {
             throw new NotFoundException("STOCK_NOT_FOUND");
         }
     }
 
-    public List<GetAllStocksDto> listByUpdate() {
-        return stockRepository.findAllOrderByUpdate().stream().map(GetAllStocksDto::new).toList();
+    public List<AllStockDto> listByUpdate() {
+        return stockRepository.findUpdateAllOrder().stream().map(AllStockDto::new).toList();
     }
 
-    public ResponseEntity<StockDto> updateStocks(StockDto stockDto) {
+    public ResponseEntity<StockDto> atualizaStocks(StockDto stockDto) {
         Stock stock = stockRepository.findById(stockDto.getId()).orElseThrow(Error::new);
         if (stockDto.getBidMin() != null) {
             stock.setBidMin(stockDto.getBidMin());
@@ -66,7 +66,7 @@ public class StockService {
         return new ResponseEntity<>(stockDto, HttpStatus.OK);
     }
 
-    public SseEmitter subscribe(HttpServletResponse response) {
+    public SseEmitter register(HttpServletResponse response) {
         response.setHeader("Cache_control", "no-store");
         SseEmitter sseEmitter = new SseEmitter(Long.MAX_VALUE);
 
@@ -83,7 +83,7 @@ public class StockService {
     public void dispatchEventToClients() {
         for (SseEmitter emitter : emitters) {
             try {
-                emitter.send(stockRepository.findAllOrderByUpdate());
+                emitter.send(stockRepository.findUpdateAllOrder());
             } catch (IOException e) {
                 emitters.remove(emitter);
             }

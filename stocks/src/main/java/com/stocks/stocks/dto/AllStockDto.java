@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 
-public class GetAllStocksDto {
+public class AllStockDto {
 
     private Long id;
 
@@ -22,7 +22,7 @@ public class GetAllStocksDto {
 
     private Double bidMax;
 
-    public GetAllStocksDto(Stock stocks) {
+    public AllStockDto(Stock stocks) {
         this.id = stocks.getId();
         this.stockSymbol = stocks.getStockSymbol();
         this.stockName = stocks.getStockName();

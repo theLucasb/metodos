@@ -24,7 +24,7 @@ public class StockController {
     }
 
     @GetMapping("/stock-info/{id}")
-    public ResponseEntity<StockInfoDto> getStockInfoById(@PathVariable Long id,
+    public ResponseEntity<StockInfoDto> getInfoStockById(@PathVariable Long id,
             @RequestHeader("Authorization") String token) {
 
         StockInfoDto stockInfoDto = this.stockService.stockInfoById(id, token);

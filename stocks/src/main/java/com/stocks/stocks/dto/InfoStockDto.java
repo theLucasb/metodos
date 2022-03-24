@@ -9,16 +9,16 @@ import lombok.Setter;
 @Data
 @Getter
 @Setter
-public class StockInfoDto {
+public class InfoStockDto {
 
     private Long id;
     private String stockSymbol;
     private String stockName;
 
-    public StockInfoDto() {
+    public InfoStockDto() {
     }
 
-    public StockInfoDto(Stock stock) {
+    public InfoStockDto(Stock stock) {
         this.id = stock.getId();
         this.stockSymbol = stock.getStockSymbol();
         this.stockName = stock.getStockName();

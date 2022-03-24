@@ -35,12 +35,12 @@ public class StockController {
 
     @GetMapping
 
-    public List<Stock> listarStock() {
+    public List<Stock> stockListAll() {
         return stockRepository.findAll();
     }
 
     @GetMapping("/{id}")
-    public Optional<Stock> listarStock(@PathVariable Long id, @RequestHeader("Authorization") String acessToken) {
+    public Optional<Stock> stockListAll(@PathVariable Long id, @RequestHeader("Authorization") String acessToken) {
         return stockRepository.findById(id);
     }
 
@@ -50,9 +50,9 @@ public class StockController {
     }
 
     @PostMapping("/update_stocks")
-    public ResponseEntity<StockDto> updateStocks(
+    public ResponseEntity<StockDto> atualizaStocks(
             @Valid @RequestBody StockDto stockDto) throws ResourceNotFoundException {
-        return stockService.updateStocks(stockDto);
+        return stockService.atualizaStocks(stockDto);
     }
 
     @DeleteMapping

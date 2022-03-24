@@ -16,6 +16,14 @@ import lombok.Setter;
 public class UserDto {
 
     private Long id;
+    private String username;
+    private Double dollarBalance;
+
+    public UserDto(User user) {
+        id = user.getId();
+        username = user.getUsername();
+        dollarBalance = user.getDollarBalance();
+    }
 
     public User transformaParaObjeto() {
         return new User(

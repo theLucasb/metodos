@@ -3,6 +3,7 @@ package com.user.user.controller;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.user.user.services.UserService;
 
@@ -34,12 +35,12 @@ public class UserController {
         return userService.listAll();
     }
 
-    @GetMapping("/users-id")
-    public List<UserDto> listUsersId() throws InterruptedException {
-        Thread.sleep(3000);
+    // @GetMapping("/users-id")
+    // public List<UserDto> listUsersId() throws InterruptedException {
+    // Thread.sleep(3000);
 
-        return userService.listAllDto();
-    }
+    // return userService.listAllDto();
+    // }
 
     @GetMapping("/users/{id}")
     public ResponseEntity<User> getUser(@PathVariable("id") Long id) {
@@ -52,12 +53,8 @@ public class UserController {
     }
 
     @GetMapping("/users/username/{username}")
-    public ResponseEntity<UserDto> findByUsername(@PathVariable("username") String username) throws NotFoundException {
-        try {
-            return ResponseEntity.ok().body(userService.findByUsername(username));
-        } catch (Exception e) {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<Optional<UserDto>> findByUsername(@PathVariable("username") String username) {
+        return ResponseEntity.ok().body(userService.findByUsername(username));
     }
 
     @PostMapping("/new_user")
