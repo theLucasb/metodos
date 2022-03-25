@@ -1,4 +1,4 @@
-package com.user.user.Model;
+package com.user.user.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;

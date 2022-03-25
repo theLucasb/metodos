@@ -4,8 +4,8 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import com.user.user.Model.IdUserStocks;
-import com.user.user.Model.UserStockBalance;
+import com.user.user.model.IdUserStocks;
+import com.user.user.model.UserStockBalance;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

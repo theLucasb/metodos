@@ -1,8 +1,8 @@
-package com.user.user.Dto;
+package com.user.user.dto;
 
-import com.user.user.Model.IdUserStocks;
-import com.user.user.Model.User;
-import com.user.user.Model.UserStockBalance;
+import com.user.user.model.IdUserStocks;
+import com.user.user.model.User;
+import com.user.user.model.UserStockBalance;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

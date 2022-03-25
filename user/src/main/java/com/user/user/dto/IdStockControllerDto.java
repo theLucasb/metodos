@@ -1,4 +1,4 @@
-package com.user.user.Dto;
+package com.user.user.dto;
 
 import javax.persistence.Column;
 

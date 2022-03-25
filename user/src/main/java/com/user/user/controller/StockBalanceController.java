@@ -2,9 +2,9 @@ package com.user.user.controller;
 
 import java.util.List;
 
-import com.user.user.Dto.UserStockBalanceDto;
-import com.user.user.Model.User;
-import com.user.user.Model.UserStockBalance;
+import com.user.user.dto.UserStockBalanceDto;
+import com.user.user.model.User;
+import com.user.user.model.UserStockBalance;
 import com.user.user.repository.StockBalanceRepository;
 import com.user.user.repository.UserRepository;
 import com.user.user.services.UserStockBalanceServices;

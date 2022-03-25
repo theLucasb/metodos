@@ -1,13 +1,13 @@
 package com.user.user.services;
 
-import com.user.user.Dto.OrdersDto;
-import com.user.user.Model.IdUserStocks;
-import com.user.user.Model.Orders;
-import com.user.user.Model.User;
-import com.user.user.Model.UserStockBalance;
 import com.user.user.consumer.dto.StockDto;
 import com.user.user.consumer.service.StockService;
-import com.user.user.handleerror.NotFoundException;
+import com.user.user.dto.OrdersDto;
+import com.user.user.model.IdUserStocks;
+import com.user.user.model.Orders;
+import com.user.user.model.User;
+import com.user.user.model.UserStockBalance;
+import com.user.user.notfound.NotFoundException;
 import com.user.user.repository.OrdersRepository;
 import com.user.user.repository.StockBalanceRepository;
 import com.user.user.repository.UserRepository;

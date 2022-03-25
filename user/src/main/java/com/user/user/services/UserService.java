@@ -3,9 +3,9 @@ package com.user.user.services;
 import java.util.List;
 import java.util.Optional;
 
-import com.user.user.Dto.SaveUserDto;
-import com.user.user.Dto.UserDto;
-import com.user.user.Model.User;
+import com.user.user.dto.SaveUserDto;
+import com.user.user.dto.UserDto;
+import com.user.user.model.User;
 import com.user.user.repository.UserRepository;
 
 import org.springframework.stereotype.Service;
@@ -31,23 +31,10 @@ public class UserService {
         return userRepository.findById(id).orElseThrow();
     }
 
-    // public UserDto findByUsername(String username) throws NotFoundException {
-    // Optional<User> user = userRepository.findByUsername(username);
-    // if (user.isPresent()) {
-    // return new UserDto(user.get().getId());
-    // } else {
-    // throw new NotFoundException("NOT_FOUND");
-    // }
-    // }
-
     public Optional<UserDto> findByUsername(String username) {
         Optional<User> user = userRepository.findByUsername(username);
         return user.map(UserDto::new);
 
     }
 
-    // public List<UserDto> listAllDto() {
-    // return userRepository.findAll().stream().map((User user) -> new
-    // UserDto(user.getId())).toList();
-    // }
 }

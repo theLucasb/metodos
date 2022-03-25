@@ -1,6 +1,6 @@
-package com.user.user.Dto;
+package com.user.user.dto;
 
-import com.user.user.Model.User;
+import com.user.user.model.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

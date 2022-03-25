@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 
-import com.user.user.Dto.SaveUserDto;
-import com.user.user.Dto.UserDto;
-import com.user.user.Model.User;
+import com.user.user.dto.SaveUserDto;
+import com.user.user.dto.UserDto;
+import com.user.user.model.User;
 
 @CrossOrigin("http://localhost:8081/")
 @RestController
@@ -33,13 +33,6 @@ public class UserController {
     public List<User> listaUsers() {
         return userService.listAll();
     }
-
-    // @GetMapping("/users-id")
-    // public List<UserDto> listUsersId() throws InterruptedException {
-    // Thread.sleep(3000);
-
-    // return userService.listAllDto();
-    // }
 
     @GetMapping("/users/{id}")
     public ResponseEntity<User> getUser(@PathVariable("id") Long id) {

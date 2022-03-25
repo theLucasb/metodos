@@ -1,10 +1,9 @@
 package com.user.user.controller;
 
-import com.user.user.Dto.OrdersDto;
-import com.user.user.Dto.UpdateOrderDto;
-import com.user.user.Model.Orders;
-import com.user.user.handleerror.NotFoundException;
-
+import com.user.user.dto.OrdersDto;
+import com.user.user.dto.UpdateOrderDto;
+import com.user.user.model.Orders;
+import com.user.user.notfound.NotFoundException;
 import com.user.user.services.OrdersServices;
 
 import org.springframework.data.domain.Page;

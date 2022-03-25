@@ -3,10 +3,10 @@ package com.user.user.services;
 import java.util.List;
 import java.util.Optional;
 
-import com.user.user.Dto.UserStockBalanceDto;
-import com.user.user.Model.IdUserStocks;
-import com.user.user.Model.User;
-import com.user.user.Model.UserStockBalance;
+import com.user.user.dto.UserStockBalanceDto;
+import com.user.user.model.IdUserStocks;
+import com.user.user.model.User;
+import com.user.user.model.UserStockBalance;
 import com.user.user.repository.StockBalanceRepository;
 
 import org.springframework.stereotype.Service;

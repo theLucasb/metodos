@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import com.user.user.Model.Orders;
+import com.user.user.model.Orders;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
