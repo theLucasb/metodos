@@ -23,7 +23,7 @@ public class SaveUserDto {
 
     private Boolean enabled = true;
 
-    public User transformaParaObjeto() {
+    public User buscarDto() {
         return new User(
                 null, username,
                 password,

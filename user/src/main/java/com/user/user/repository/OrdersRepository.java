@@ -27,8 +27,8 @@ public interface OrdersRepository extends JpaRepository<Orders, Long> {
         Page<Orders> findByIdPageable(Pageable pageable, @Param("id_user") Long id);
 
         @Modifying
-        @Query(value = "UPDATE  user_orders set remaining_volume = :remaining_volume where id = :id", nativeQuery = true)
-        Integer findByIdOrder(@Param("remaining_volume") Long remainingVolume,
+        @Query(value = "UPDATE  user_orders set volume_remaining = :volume_remaining where id = :id", nativeQuery = true)
+        Integer findByIdOrder(@Param("volume_remaining") Long volumeRemaining,
                         @Param("id") Long id);
 
         @Modifying
@@ -36,15 +36,15 @@ public interface OrdersRepository extends JpaRepository<Orders, Long> {
         Integer findbyIdStatus(@Param("id") Long id);
 
         @Query(value = "SELECT min(price) from user_orders uo where uo.id_stock = :id_stock and uo.type = 1 and uo.status = 1", nativeQuery = true)
-        Double findByIdStockMinPriceBid(@Param("id_stock") Long idStock);
+        Double findByBidMin(@Param("id_stock") Long idStock);
 
         @Query(value = "SELECT max(price) from user_orders uo where uo.id_stock = :id_stock and uo.type = 1 and uo.status = 1", nativeQuery = true)
-        Double findByIdStockMaxPriceBid(@Param("id_stock") Long idStock);
+        Double findByBidMax(@Param("id_stock") Long idStock);
 
         @Query(value = "SELECT min(price) from user_orders uo where uo.id_stock = :id_stock and uo.type = 2 and uo.status = 1", nativeQuery = true)
-        Double findByIdStockMinPriceAsk(@Param("id_stock") Long idStock);
+        Double findByAskMin(@Param("id_stock") Long idStock);
 
         @Query(value = "SELECT max(price) from user_orders uo where uo.id_stock = :id_stock and uo.type = 2 and uo.status = 1", nativeQuery = true)
-        Double findByIdStockMaxPriceAsk(@Param("id_stock") Long idStock);
+        Double findByAskMax(@Param("id_stock") Long idStock);
 
 }

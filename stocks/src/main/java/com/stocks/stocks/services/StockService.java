@@ -66,7 +66,7 @@ public class StockService {
         return new ResponseEntity<>(stockDto, HttpStatus.OK);
     }
 
-    public SseEmitter register(HttpServletResponse response) {
+    public SseEmitter subscribe(HttpServletResponse response) {
         response.setHeader("Cache_control", "no-store");
         SseEmitter sseEmitter = new SseEmitter(Long.MAX_VALUE);
 

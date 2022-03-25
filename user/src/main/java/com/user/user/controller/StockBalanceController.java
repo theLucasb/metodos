@@ -60,7 +60,7 @@ public class StockBalanceController {
     public ResponseEntity<UserStockBalance> salvar(@RequestBody UserStockBalanceDto dto) {
         User user = userRepository.findById(dto.getIdUser()).orElseThrow();
         UserStockBalance userStockBalance = userStockBalanceServices.findById(user, dto.getIdStock())
-                .orElse(userStockBalanceServices.salvar(dto.transformaParaObjeto(user)));
+                .orElse(userStockBalanceServices.salvar(dto.buscarDto(user)));
         return new ResponseEntity<>(userStockBalance, HttpStatus.CREATED);
     }
 

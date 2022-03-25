@@ -34,7 +34,7 @@ public class OrdersDto {
 
     private Long volumeRemaining;
 
-    public Orders transformaParaObjeto(User users) {
+    public Orders buscarDto(User users) {
         Orders orders = new Orders();
         orders.setUsers(users);
         orders.setIdStock(idStock);

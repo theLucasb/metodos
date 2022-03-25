@@ -26,7 +26,7 @@ public class UserStockBalanceDto {
 
     private Long volume;
 
-    public UserStockBalance transformaParaObjeto(User user) {
+    public UserStockBalance buscarDto(User user) {
         return new UserStockBalance(new IdUserStocks(user, idStock),
                 stockSymbol,
                 stockName,

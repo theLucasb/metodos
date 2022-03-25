@@ -31,12 +31,12 @@ public class OrdersController {
 
     @GetMapping("/orders")
     public Page<Orders> listaPedidos(@RequestParam int pageSize, @RequestParam int pageNumber) {
-        return ordersServices.findOrdersPage(pageSize, pageNumber);
+        return ordersServices.findByOrdersPage(pageSize, pageNumber);
     }
 
     @GetMapping("/orders/{id}")
     public Page<Orders> listaOrdemPorId(@PathVariable Long id, @RequestParam int pageNumber, int pageSize) {
-        return ordersServices.findOrdersPageById(id, pageSize, pageNumber);
+        return ordersServices.findByIdOrdersPage(id, pageSize, pageNumber);
     }
 
     @PostMapping("/order-update/{status}")
@@ -44,7 +44,7 @@ public class OrdersController {
             @PathVariable("status") Integer status, @RequestHeader("Authorization") String token)
             throws NotFoundException {
         try {
-            return ResponseEntity.ok().body(ordersServices.updateStatus(dto.getId(), status));
+            return ResponseEntity.ok().body(ordersServices.atualizarStatus(dto.getId(), status));
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }

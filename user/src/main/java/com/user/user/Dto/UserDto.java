@@ -25,7 +25,7 @@ public class UserDto {
         dollarBalance = user.getDollarBalance();
     }
 
-    public User transformaParaObjeto() {
+    public User buscarDto() {
         return new User(
                 id, null, null, null, null, null, null);
     }

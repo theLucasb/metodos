@@ -31,7 +31,8 @@ public class StockService {
 
     }
 
-    public StockInfoDto stockInfoById(@PathVariable Long id, @RequestHeader("Authorization") String token) {
+    public StockInfoDto stockInfoById(@PathVariable Long id,
+            @RequestHeader("Authorization") String token) {
 
         Mono<StockInfoDto> monoStock = this.webClient
                 .method(HttpMethod.GET)

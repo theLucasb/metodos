@@ -20,7 +20,6 @@ import lombok.RequiredArgsConstructor;
 import com.user.user.Dto.SaveUserDto;
 import com.user.user.Dto.UserDto;
 import com.user.user.Model.User;
-import com.user.user.handleerror.NotFoundException;
 
 @CrossOrigin("http://localhost:8081/")
 @RestController

@@ -6,7 +6,6 @@ import java.util.Optional;
 import com.user.user.Dto.SaveUserDto;
 import com.user.user.Dto.UserDto;
 import com.user.user.Model.User;
-import com.user.user.handleerror.NotFoundException;
 import com.user.user.repository.UserRepository;
 
 import org.springframework.stereotype.Service;
@@ -19,7 +18,7 @@ public class UserService {
     private final UserRepository userRepository;
 
     public SaveUserDto salvar(SaveUserDto saveUserDto) {
-        User user = saveUserDto.transformaParaObjeto();
+        User user = saveUserDto.buscarDto();
         userRepository.save(user);
         return saveUserDto;
     }
